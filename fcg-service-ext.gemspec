@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README.rdoc",
      "Rakefile",
+     "fcg-service-ext.gemspec",
      "lib/fcg-service-ext.rb",
      "lib/fcg-service-ext/fcg_service.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",

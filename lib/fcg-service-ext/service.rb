@@ -1,6 +1,6 @@
 require 'sinatra' unless defined?(Sinatra)
-module FCG
-  class Service < Sinatra::Base
+module Service
+  class Base < Sinatra::Base
     before do
       content_type :json
     end
