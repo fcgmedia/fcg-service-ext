@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
      "Rakefile",
      "fcg-service-ext.gemspec",
      "lib/fcg-service-ext.rb",
-     "lib/fcg-service-ext/fcg_service.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/image_plugin.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/mm-paranoid.rb",
@@ -33,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/fcg-service-ext/mongo_mapper/plugins/token_plugin.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/user_hash_plugin.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/voting_plugin.rb",
+     "lib/fcg-service-ext/service.rb",
      "lib/fcg-service-ext/validation_constants.rb",
      "lib/fcg-service-ext/version.rb",
      "spec/fcg-service-ext_spec.rb",
