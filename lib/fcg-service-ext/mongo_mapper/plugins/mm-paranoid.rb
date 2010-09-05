@@ -4,11 +4,7 @@ module MongoMapper
       def self.included(model)
         model.plugin self
       end
-
-      def self.configure(base)
-        base.key(:deleted_at, Time, :index => true)
-      end
-
+      
       module InstanceMethods
         def destroy
           run_callbacks(:before_destroy)
@@ -25,6 +21,10 @@ module MongoMapper
         def destroyed?
           deleted?
         end
+      end
+
+      def self.configure(base)
+        base.key(:deleted_at, Time, :index => true)
       end
     end
   end
