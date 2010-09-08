@@ -25,7 +25,7 @@ module VotingPlugin
   end
   
   def self.configure(model)
-    puts "Configuring VotingPlugin for #{model}..."
+    # puts "Configuring VotingPlugin for #{model}..."
     model.key :up_voters,     Array
     model.key :up_votes,      Integer, :default => 0
     model.key :down_voters,   Array

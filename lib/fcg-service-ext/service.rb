@@ -11,9 +11,13 @@ module Service
     end
     
     def error_hash(instance, message)
+      errors = instance.errors.inject({}) do |sum,values| 
+        k = values.shift
+        sum[k] = values.map(&:uniq); sum
+      end
       {
         :message => message,
-        :errors => instance.errors
+        :errors => errors
       }
     end
   end

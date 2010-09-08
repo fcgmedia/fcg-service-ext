@@ -16,7 +16,7 @@ module ImagePlugin
         [ks, album].each{|e| image_key_array << e }
       end
       attr_accessor :album_hash
-      puts "ImagePlugin instance methods: " + @image_keys.inspect
+      # puts "ImagePlugin instance methods: " + @image_keys.inspect
     end
     
     def image_key_array
@@ -112,6 +112,6 @@ module ImagePlugin
   end
   
   def self.configure(model)
-    puts "Configuring ImagePlugin for #{model}..."
+    # puts "Configuring ImagePlugin for #{model}..."
   end
 end

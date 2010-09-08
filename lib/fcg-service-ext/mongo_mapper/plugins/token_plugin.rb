@@ -18,7 +18,7 @@ module TokenPlugin
   end
   
   def self.configure(model)
-    puts "Configuring TokenPlugin for #{model}..."
+    # puts "Configuring TokenPlugin for #{model}..."
     model.key :token_id, String
     model.key :token_expire_at, Time
   end

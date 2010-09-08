@@ -37,7 +37,7 @@ module SocialPlugin
   end
   
   def self.configure(model)
-    puts "Configuring SocialPlugin for #{model}..."
+    # puts "Configuring SocialPlugin for #{model}..."
     model.key :facebook_session, Hash
     model.key :facebook_id, String
     model.key :facebook_proxy_email, String
