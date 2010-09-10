@@ -1,5 +1,7 @@
 require 'sinatra' unless defined?(Sinatra)
 module Service
+  include ClassLevelInheritableAttributes
+  cattr_inheritable :model, :api_version
   class Base < Sinatra::Base
     disable :layout
     before do
@@ -13,7 +15,8 @@ module Service
     def error_hash(instance, message)
       errors = instance.errors.inject({}) do |sum,values| 
         k = values.shift
-        sum[k] = values.map(&:uniq); sum
+        sum[k] = values.map(&:uniq)
+        sum
       end
       {
         :message => message,
