@@ -1,9 +1,5 @@
 module SocialModule
   module ClassMethods
-    def find_by_facebook_id(fb_id)
-      where(:facebook_id => fb_id).first
-    end
-    
     def get_data_from_facebook_session(access_token)
       MiniFB::OAuthSession.new(access_token)
     end
@@ -17,8 +13,7 @@ module SocialModule
           :email                  => fb.me.email,
           :facebook_proxy_email   => fb.me.email,
           :facebook_id            => fb.me.id,
-          :password               => password,
-          :password_confirmation  => password
+          :password               => password
         )
         user.confirm! if user.valid?
       end

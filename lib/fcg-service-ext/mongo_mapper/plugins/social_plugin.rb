@@ -1,4 +1,9 @@
 module SocialPlugin
+  module ClassMethods
+    def find_by_facebook_id(fb_id)
+      where(:facebook_id => fb_id).first
+    end
+  end
   
   def self.configure(model)
     # puts "Configuring SocialPlugin for #{model}..."

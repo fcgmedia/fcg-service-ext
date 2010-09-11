@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2010-09-10}
+  s.date = %q{2010-09-11}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [
@@ -25,12 +25,17 @@ Gem::Specification.new do |s|
      "fcg-service-ext.gemspec",
      "lib/fcg-service-ext.rb",
      "lib/fcg-service-ext/cattr_inheritable_attrs.rb",
+     "lib/fcg-service-ext/models.rb",
+     "lib/fcg-service-ext/models/user_includable.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/image_plugin.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/mm-paranoid.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/rating_plugin.rb",
+     "lib/fcg-service-ext/mongo_mapper/plugins/social_module.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/social_plugin.rb",
+     "lib/fcg-service-ext/mongo_mapper/plugins/token_module.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/token_plugin.rb",
+     "lib/fcg-service-ext/mongo_mapper/plugins/user_hash_module.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/user_hash_plugin.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/voting_plugin.rb",
      "lib/fcg-service-ext/service.rb",

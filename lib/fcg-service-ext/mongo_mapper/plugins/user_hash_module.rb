@@ -26,6 +26,11 @@ module UserHashModule
       define_method("#{f}?") do
         flags[f]
       end
+
+      define_method("#{f}!") do
+        flags[f] = true
+        save
+      end
     end
 
     [:city, :state, :zipcode, :country, :time_zone].each do |loc|
