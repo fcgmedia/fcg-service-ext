@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "lib/fcg-service-ext.rb",
      "lib/fcg-service-ext/cattr_inheritable_attrs.rb",
      "lib/fcg-service-ext/models.rb",
+     "lib/fcg-service-ext/models/client.rb",
      "lib/fcg-service-ext/models/user_includable.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/image_plugin.rb",

@@ -1,5 +1,6 @@
 require "rubygems"
 require "active_model"
+require "active_support"
 require "typhoeus"
 
 Dir[
@@ -13,19 +14,18 @@ module FCG
     module ClassMethods
       def find(id)
         request = Typhoeus::Request.new(
-          "#{host}/api/#{version}/#{model}/#{id}",
+          "#{@host}/api/#{@version}/#{@model}/#{id}",
           :method => :get)
-
         request.on_complete do |response|
-          return handle_service_response(response)
+          handle_service_response(response)
         end
 
-        hydra.queue(request)
-        hydra.run
-        
+        @hydra.queue(request)
+        @hydra.run
+
         request.handled_response
       end
-      
+
       def handle_service_response(response)
         case response.code
         when 200
@@ -40,6 +40,14 @@ module FCG
           false
         end
       end
+
+      def setup_service(*args)
+        args.each do |arg| 
+          arg.each_pair do |key, value| 
+            class_eval{ instance_variable_set("@#{key}", value) }
+          end 
+        end
+      end
     end
 
     module InstanceMethods
@@ -50,7 +58,7 @@ module FCG
         @new_record = (self.id.nil? ? true :false)
         self
       end
-      
+
       def attributes
         ATTRIBUTES.inject(ActiveSupport::HashWithIndifferentAccess.new) do |result, key|
           result[key] = read_attribute_for_validation(key)
@@ -65,19 +73,19 @@ module FCG
       def read_attribute_for_validation(key)
         send(key)
       end
-      
+
       def save(*)
         create_or_update
       end
-      
+
       def new_record?
         @new_record
       end
-      
+
       def errors
         @errors ||= ActiveModel::Errors.new(self)
       end
-      
+
       private
       def handle_service_response(response)
         case response.code
@@ -93,31 +101,31 @@ module FCG
           false
         end
       end
-      
+
       def create
         return false unless valid?
         Typhoeus::Request.new(
-          "#{host}/api/#{version}/#{model}",
+          "#{self.class.host}/api/#{self.class.version}/#{self.class.model}",
           :method => :post, :body => self.to_json)
       end
-      
+
       def update
         return false unless valid?
         Typhoeus::Request.new(
-          "#{host}/api/#{version}/#{model}/#{id}",
+          "#{self.class.host}/api/#{self.class.version}/#{self.class.model}/#{id}",
           :method => :put, :body => self.to_json)
       end
-      
+
       def create_or_update
         request = new_record? ? create : update
         if request.respond_to? :on_complete
           request.on_complete do |response|
-            return handle_service_response(response)
+            handle_service_response(response)
           end
-        
-          hydra.queue(request)
-          hydra.run
-        
+
+          self.class.hydra.queue(request)
+          self.class.hydra.run
+
           request.handled_response
         else
           request != false
@@ -131,11 +139,14 @@ module FCG
       # receiver.send :include, ActiveModel::Validations
       receiver.send :include, ActiveModel::Serializers::JSON
       receiver.send :include, ClassLevelInheritableAttributes
-      receiver.cattr_inheritable :host, :hydra, :model, :version
+      receiver.cattr_inheritable :host, :hydra, :model, :version, :async_client
     end
   end
 end
 
+__END__
+# HYDRA = Typhoeus::Hydra.new
+# 
 # class Run
 #   ATTRIBUTES = [:id, :bio, :created_at, :crypted_password, :date_of_birth, :deleted_at, :email, 
 #     :facebook_id, :facebook_proxy_email, :facebook_session, :flags, :flyers, :last_visited_at, 
@@ -144,11 +155,11 @@ end
 #     :twitter_username, :updated_at, :uploaded_photos_at, :username, :web]
 #   attr_accessor *ATTRIBUTES
 #   include FCG::Client
+#   setup_service :model => "users",  :hydra => HYDRA, :host => "http://127.0.0.1:8081", :version => "v1"
 # end
 # 
-# Run.host = "http://localhost:8081"
-# Run.model = "users"
-# Run.version = "v1"
-# Run.hydra = Typhoeus::Hydra.new
-# t = Run.find("4c401627ff808d982a00000b")
-# puts t.inspect
+# 1.upto(6).each do |i|
+#   puts "Pass ##{i}"
+#   t = Run.find("4c401627ff808d982a00000b")
+#   puts t.inspect
+# end
