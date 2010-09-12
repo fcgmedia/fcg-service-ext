@@ -14,14 +14,14 @@ module FCG
     module ClassMethods
       def find(id)
         request = Typhoeus::Request.new(
-          "#{@host}/api/#{@version}/#{@model}/#{id}",
+          "#{self.host}/api/#{self.version}/#{self.model}/#{id}",
           :method => :get)
         request.on_complete do |response|
           handle_service_response(response)
         end
 
-        @hydra.queue(request)
-        @hydra.run
+        self.hydra.queue(request)
+        self.hydra.run
 
         request.handled_response
       end
@@ -47,6 +47,13 @@ module FCG
             class_eval{ instance_variable_set("@#{key}", value) }
           end 
         end
+        class_eval do
+          instance_variable_set("@model", self.name.downcase.pluralize) if instance_variable_get("@model").nil?
+        end
+      end
+      
+      def attributes
+        @attributes ||= const_get('ATTRIBUTES' )
       end
     end
 
@@ -60,7 +67,7 @@ module FCG
       end
 
       def attributes
-        ATTRIBUTES.inject(ActiveSupport::HashWithIndifferentAccess.new) do |result, key|
+        self.class.attributes.inject(ActiveSupport::HashWithIndifferentAccess.new) do |result, key|
           result[key] = read_attribute_for_validation(key)
           result
         end
@@ -96,7 +103,7 @@ module FCG
         when 400
           response_body_parsed = JSON.parse(response.body)
           response_body_parsed["errors"].each_pair do |key, values|
-            values.uniq.compact.each{|value| errors.add(key.to_sym, value) }
+            values.compact.each{|value| errors.add(key.to_sym, value) }
           end
           false
         end
@@ -112,7 +119,7 @@ module FCG
       def update
         return false unless valid?
         Typhoeus::Request.new(
-          "#{self.class.host}/api/#{self.class.version}/#{self.class.model}/#{id}",
+          "#{self.class.host}/api/#{self.class.version}/#{self.class.model}/#{self.id}",
           :method => :put, :body => self.to_json)
       end
 
@@ -120,7 +127,7 @@ module FCG
         request = new_record? ? create : update
         if request.respond_to? :on_complete
           request.on_complete do |response|
-            handle_service_response(response)
+            return handle_service_response(response)
           end
 
           self.class.hydra.queue(request)
@@ -143,23 +150,22 @@ module FCG
     end
   end
 end
-
 __END__
-# HYDRA = Typhoeus::Hydra.new
-# 
-# class Run
-#   ATTRIBUTES = [:id, :bio, :created_at, :crypted_password, :date_of_birth, :deleted_at, :email, 
-#     :facebook_id, :facebook_proxy_email, :facebook_session, :flags, :flyers, :last_visited_at, 
-#     :location, :names, :password, :photo_album, :photo_count, :photos, :posted_party_at, :profile_image, 
-#     :salt, :sex, :site_specific_settings, :token_expire_at, :token_id, :tokens_expire_at, 
-#     :twitter_username, :updated_at, :uploaded_photos_at, :username, :web]
-#   attr_accessor *ATTRIBUTES
-#   include FCG::Client
-#   setup_service :model => "users",  :hydra => HYDRA, :host => "http://127.0.0.1:8081", :version => "v1"
-# end
-# 
-# 1.upto(6).each do |i|
-#   puts "Pass ##{i}"
-#   t = Run.find("4c401627ff808d982a00000b")
-#   puts t.inspect
-# end
+HYDRA = Typhoeus::Hydra.new
+
+class Run
+  ATTRIBUTES = [:id, :bio, :created_at, :crypted_password, :date_of_birth, :deleted_at, :email, 
+    :facebook_id, :facebook_proxy_email, :facebook_session, :flags, :flyers, :last_visited_at, 
+    :location, :names, :password, :photo_album, :photo_count, :photos, :posted_party_at, :profile_image, 
+    :salt, :sex, :site_specific_settings, :token_expire_at, :token_id, :tokens_expire_at, 
+    :twitter_username, :updated_at, :uploaded_photos_at, :username, :web]
+  attr_accessor *ATTRIBUTES
+  include FCG::Client
+  setup_service :model => "users", :hydra => HYDRA, :host => "http://127.0.0.1:8081", :version => "v1"
+end
+
+1.upto(6).each do |i|
+  puts "Pass ##{i}"
+  t = Run.find("4c401627ff808d982a00000b")
+  puts t.inspect
+end

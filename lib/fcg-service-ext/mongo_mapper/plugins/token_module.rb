@@ -1,3 +1,4 @@
+require "guid"
 module TokenModule
   module ClassMethods
     
@@ -11,7 +12,7 @@ module TokenModule
     def generate_token!(expires_at=1.day.since)
       self.token_id = "#{Time.now.utc.to_i}-#{Guid.new}"
       self.token_expire_at = expires_at.utc
-      save!
+      save
     end
   end
   

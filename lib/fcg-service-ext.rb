@@ -4,6 +4,7 @@ require 'fcg-service-ext/version'
   service
   mongo_mapper/plugins
   models
+  helpers
 }.each do |filename|
   require "fcg-service-ext/#{filename}"
 end
