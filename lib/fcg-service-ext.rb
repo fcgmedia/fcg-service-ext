@@ -1,19 +1,18 @@
+require "rubygems"
 require 'fcg-service-ext/version'
 %W{
+  fcg
   cattr_inheritable_attrs
   service
   mongo_mapper/plugins
-  models
-  helpers
-}.each do |filename|
-  require "fcg-service-ext/#{filename}"
+}.each do |file|
+  require "fcg-service-ext/#{file}"
 end
-# Dir[
-#   File.expand_path("../models/*.rb", __FILE__)
-# ].each do |file|
-#   require file
-# end
-# require 'fcg-service-ext/cattr_inheritable_attrs'
-# require 'fcg-service-ext/service'
-# require 'fcg-service-ext/mongo_mapper/plugins'
-# require 'fcg-service-ext/models'
+
+# models, helpers
+Dir[
+  File.expand_path("../fcg-service-ext/models/*.rb", __FILE__),
+  File.expand_path("../fcg-service-ext/helpers/*.rb", __FILE__)
+].each do |file|
+  require file
+end

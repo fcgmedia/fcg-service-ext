@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2010-09-12}
+  s.date = %q{2010-09-13}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [
@@ -19,13 +19,15 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     "Gemfile",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
      "fcg-service-ext.gemspec",
      "lib/fcg-service-ext.rb",
      "lib/fcg-service-ext/cattr_inheritable_attrs.rb",
-     "lib/fcg-service-ext/models.rb",
+     "lib/fcg-service-ext/fcg.rb",
+     "lib/fcg-service-ext/helpers/session_controller_helper.rb",
      "lib/fcg-service-ext/models/client.rb",
      "lib/fcg-service-ext/models/user_includable.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",

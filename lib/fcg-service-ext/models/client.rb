@@ -12,6 +12,18 @@ end
 module FCG
   module Client
     module ClassMethods
+      def create(record)
+        Typhoeus::Request.new(
+          "#{self.host}/api/#{self.version}/#{self.model}",
+          :method => :post, :body => record.to_json)
+      end
+
+      def update(record)
+        Typhoeus::Request.new(
+          "#{self.host}/api/#{self.version}/#{self.model}/#{record.id}",
+          :method => :put, :body => record.to_json)
+      end
+      
       def find(id)
         request = Typhoeus::Request.new(
           "#{self.host}/api/#{self.version}/#{self.model}/#{id}",
@@ -25,7 +37,21 @@ module FCG
 
         request.handled_response
       end
+      
+      def delete(id)
+        request = Typhoeus::Request.new(
+          "#{self.host}/api/#{self.version}/#{self.model}/#{id}",
+          :method => :delete)
+        request.on_complete do |response|
+          handle_service_response(response)
+        end
 
+        self.hydra.queue(request)
+        self.hydra.run
+
+        request.handled_response
+      end
+      
       def handle_service_response(response)
         case response.code
         when 200
@@ -55,6 +81,14 @@ module FCG
       def attributes
         @attributes ||= const_get('ATTRIBUTES' )
       end
+
+      def column_names
+        attributes
+      end
+
+      def human_name
+        self.name.demodulize.titleize
+      end
     end
 
     module InstanceMethods
@@ -63,6 +97,7 @@ module FCG
         self.attributes = attributes_or_json.respond_to?(:with_indifferent_access) ? attributes_or_json.with_indifferent_access : attributes_or_json
         @errors = ActiveModel::Errors.new(self)
         @new_record = (self.id.nil? ? true :false)
+        @_destroyed = false
         self
       end
 
@@ -85,14 +120,46 @@ module FCG
         create_or_update
       end
 
+      def to_param
+        id.to_s
+      end
+      
+      def to_key
+        persisted? ? [id.to_s] : nil
+      end
+      
+      def to_model
+        self
+      end
+      
       def new_record?
         @new_record
+      end
+      
+      def persisted?
+        !(new_record? || destroyed?)
+      end
+
+      def destroyed?
+        @_destroyed == true
       end
 
       def errors
         @errors ||= ActiveModel::Errors.new(self)
       end
-
+      
+      def delete
+        @_destroyed = true
+        self.class.delete(id) unless new_record?
+      end
+      
+      def reload
+        unless new_record?
+          self.class.find(self.id)
+        end
+        self
+      end
+      
       private
       def handle_service_response(response)
         case response.code
@@ -109,39 +176,26 @@ module FCG
         end
       end
 
-      def create
-        return false unless valid?
-        Typhoeus::Request.new(
-          "#{self.class.host}/api/#{self.class.version}/#{self.class.model}",
-          :method => :post, :body => self.to_json)
-      end
-
-      def update
-        return false unless valid?
-        Typhoeus::Request.new(
-          "#{self.class.host}/api/#{self.class.version}/#{self.class.model}/#{self.id}",
-          :method => :put, :body => self.to_json)
-      end
-
       def create_or_update
-        request = new_record? ? create : update
-        if request.respond_to? :on_complete
+        if valid?
+          request = new_record? ? self.class.create(self) : self.class.update(self)
           request.on_complete do |response|
-            return handle_service_response(response)
+            handle_service_response(response)
           end
 
           self.class.hydra.queue(request)
           self.class.hydra.run
 
-          request.handled_response
+          request.handled_response  
         else
-          request != false
+          false
         end
       end
     end
 
     def self.included(receiver)
       receiver.extend         ClassMethods
+      receiver.extend         ActiveModel::Naming if defined?(ActiveModel)
       receiver.send :include, InstanceMethods
       # receiver.send :include, ActiveModel::Validations
       receiver.send :include, ActiveModel::Serializers::JSON
@@ -164,8 +218,9 @@ class Run
   setup_service :model => "users", :hydra => HYDRA, :host => "http://127.0.0.1:8081", :version => "v1"
 end
 
-1.upto(6).each do |i|
-  puts "Pass ##{i}"
-  t = Run.find("4c401627ff808d982a00000b")
-  puts t.inspect
-end
+# 1.upto(6).each do |i|
+#   puts "Pass ##{i}"
+#   t = Run.find("4c401627ff808d982a00000b")
+#   puts t.inspect
+# end
+puts Run.column_names
