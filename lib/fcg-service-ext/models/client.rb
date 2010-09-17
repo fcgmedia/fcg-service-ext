@@ -197,7 +197,7 @@ module FCG
       receiver.extend         ClassMethods
       receiver.extend         ActiveModel::Naming if defined?(ActiveModel)
       receiver.send :include, InstanceMethods
-      # receiver.send :include, ActiveModel::Validations
+      receiver.send :include, ActiveModel::Validations
       receiver.send :include, ActiveModel::Serializers::JSON
       receiver.send :include, ClassLevelInheritableAttributes
       receiver.cattr_inheritable :host, :hydra, :model, :version, :async_client
@@ -218,9 +218,9 @@ class Run
   setup_service :model => "users", :hydra => HYDRA, :host => "http://127.0.0.1:8081", :version => "v1"
 end
 
-# 1.upto(6).each do |i|
-#   puts "Pass ##{i}"
-#   t = Run.find("4c401627ff808d982a00000b")
-#   puts t.inspect
-# end
-puts Run.column_names
+1.upto(6).each do |i|
+  puts "Pass ##{i}"
+  t = Run.find("4c401627ff808d982a00000b")
+  puts t.inspect
+end
+# puts Run.column_names

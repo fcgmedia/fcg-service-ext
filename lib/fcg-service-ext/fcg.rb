@@ -10,20 +10,11 @@ module FCG
     }
   end
   
-  module ActivityStream
-    VERBS = [
-      :mark_as_favorite,
-      :start_following,
-      :mark_as_liked,
-      :make_friend,
-      :join,
-      :play,
-      :post,
-      :save,
-      :share,
-      :tag,
-      :update
-    ]
+  module ACTIVITY
+    module VERBS
+      ALL = ["join", "make_friend", "mark_as_favorite", "mark_as_liked", "play", "post", "save", "share", "start_following", "tag", "update", "view"]
+      ALL.each{|v| self.const_set(v.upcase, v) }
+    end
     
     OBJECTS = [
       :article,
@@ -45,7 +36,7 @@ module FCG
       :review,
       :service,
       :status,
-      :videos
+      :video
     ]
     
     OBJECT_PROPERTIES = {
