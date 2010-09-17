@@ -117,7 +117,9 @@ module FCG
       end
 
       def save(*)
-        create_or_update
+        _run_save_callbacks do
+          create_or_update
+        end
       end
 
       def to_param
@@ -149,8 +151,10 @@ module FCG
       end
       
       def delete
-        @_destroyed = true
-        self.class.delete(id) unless new_record?
+        _run_delete_callbacks do
+          @_destroyed = true
+          self.class.delete(id) unless new_record?
+        end
       end
       
       def reload
@@ -194,11 +198,17 @@ module FCG
     end
 
     def self.included(receiver)
+      if defined?(ActiveModel)
+        receiver.extend         ActiveModel::Naming
+        receiver.extend         ActiveModel::Callbacks
+        receiver.send :include, ActiveModel::Dirty
+        receiver.send :include, ActiveModel::Validations
+        receiver.send :include, ActiveModel::Serializers::JSON
+        receiver.define_model_callbacks :delete
+        receiver.define_model_callbacks :save
+      end
       receiver.extend         ClassMethods
-      receiver.extend         ActiveModel::Naming if defined?(ActiveModel)
       receiver.send :include, InstanceMethods
-      receiver.send :include, ActiveModel::Validations
-      receiver.send :include, ActiveModel::Serializers::JSON
       receiver.send :include, ClassLevelInheritableAttributes
       receiver.cattr_inheritable :host, :hydra, :model, :version, :async_client
     end
@@ -216,9 +226,14 @@ class Run
   attr_accessor *ATTRIBUTES
   include FCG::Client
   setup_service :model => "users", :hydra => HYDRA, :host => "http://127.0.0.1:8081", :version => "v1"
+  before_save :pring
+  
+  def pring
+    "puts pring"
+  end
 end
 
-1.upto(6).each do |i|
+1.upto(3).each do |i|
   puts "Pass ##{i}"
   t = Run.find("4c401627ff808d982a00000b")
   puts t.inspect

@@ -1,4 +1,9 @@
-require "rubygems"
+require 'rubygems'
+require 'json'
+require 'yajl/json_gem'
+require 'ruby_hmac'
+require 'hmac-sha1'
+
 require 'fcg-service-ext/version'
 %W{
   fcg

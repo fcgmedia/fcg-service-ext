@@ -1,8 +1,3 @@
-require "rubygems"
-require "json"
-require "ruby_hmac"
-require "hmac-sha1"
-
 module FCG
   module SessionControllerHelper
     module InstanceMethods

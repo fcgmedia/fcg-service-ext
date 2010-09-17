@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
      "lib/fcg-service-ext.rb",
      "lib/fcg-service-ext/cattr_inheritable_attrs.rb",
      "lib/fcg-service-ext/fcg.rb",
+     "lib/fcg-service-ext/helpers/cookie_helper.rb",
      "lib/fcg-service-ext/helpers/session_controller_helper.rb",
      "lib/fcg-service-ext/models/client.rb",
      "lib/fcg-service-ext/models/user_includable.rb",
