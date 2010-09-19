@@ -1,7 +1,4 @@
-require "typhoeus"
 module FCG
-  HYDRA = Typhoeus::Hydra.new
-  
   module Validation
     BAD_USERNAMES = %w(user users mail login logout new destroy create edit admin ssl xxx sex bitch bitches admin hoe hoes)
     REGEX = {
@@ -12,8 +9,21 @@ module FCG
   
   module ACTIVITY
     module VERBS
-      ALL = ["join", "make_friend", "mark_as_favorite", "mark_as_liked", "play", "post", "save", "share", "start_following", "tag", "update", "view"]
-      ALL.each{|v| self.const_set(v.upcase, v) }
+      # [actor] [verb] [object] [target]
+      ALL = {
+        :join => "joined",
+        :make_friend => "made friends with",
+        :mark_as_favorite => "marked as favorite",
+        :mark_as_liked => "likes",
+        :play => "played",
+        :post => "posted",
+        :save => "saved", 
+        :share => "shared", 
+        :start_following => "started following",
+        :tag => "tagged",
+        :update => "updated",
+        :view => "viewed"
+      }
     end
     
     OBJECTS = [
