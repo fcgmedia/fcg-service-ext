@@ -3,11 +3,11 @@ require 'json'
 require 'yajl/json_gem'
 require 'ruby_hmac'
 require 'hmac-sha1'
+require 'active_model'
 
 require 'fcg-service-ext/version'
 %W{
   fcg
-  cattr_inheritable_attrs
   service
   mongo_mapper/plugins
 }.each do |file|

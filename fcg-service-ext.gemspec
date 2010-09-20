@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.0.9"
+  s.version = "0.0.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2010-09-17}
+  s.date = %q{2010-09-19}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [
@@ -25,11 +25,9 @@ Gem::Specification.new do |s|
      "Rakefile",
      "fcg-service-ext.gemspec",
      "lib/fcg-service-ext.rb",
-     "lib/fcg-service-ext/cattr_inheritable_attrs.rb",
      "lib/fcg-service-ext/fcg.rb",
      "lib/fcg-service-ext/helpers/cookie_helper.rb",
      "lib/fcg-service-ext/helpers/session_controller_helper.rb",
-     "lib/fcg-service-ext/models/client.rb",
      "lib/fcg-service-ext/models/user_includable.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/image_plugin.rb",
@@ -64,6 +62,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_runtime_dependency(%q<i18n>, [">= 0"])
       s.add_runtime_dependency(%q<json>, [">= 0"])
       s.add_runtime_dependency(%q<yajl-ruby>, [">= 0"])
       s.add_runtime_dependency(%q<ruby-hmac>, [">= 0"])
@@ -72,11 +71,10 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<bson_ext>, [">= 1.0.7"])
       s.add_runtime_dependency(%q<mongo_mapper>, [">= 0.8.4"])
       s.add_runtime_dependency(%q<sinatra>, [">= 0"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.0"])
       s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
-      s.add_runtime_dependency(%q<typhoeus>, [">= 0.1.31"])
     else
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_dependency(%q<i18n>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<yajl-ruby>, [">= 0"])
       s.add_dependency(%q<ruby-hmac>, [">= 0"])
@@ -85,12 +83,11 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bson_ext>, [">= 1.0.7"])
       s.add_dependency(%q<mongo_mapper>, [">= 0.8.4"])
       s.add_dependency(%q<sinatra>, [">= 0"])
-      s.add_dependency(%q<activesupport>, [">= 3.0.0"])
       s.add_dependency(%q<activemodel>, [">= 3.0.0"])
-      s.add_dependency(%q<typhoeus>, [">= 0.1.31"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
+    s.add_dependency(%q<i18n>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<yajl-ruby>, [">= 0"])
     s.add_dependency(%q<ruby-hmac>, [">= 0"])
@@ -99,9 +96,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bson_ext>, [">= 1.0.7"])
     s.add_dependency(%q<mongo_mapper>, [">= 0.8.4"])
     s.add_dependency(%q<sinatra>, [">= 0"])
-    s.add_dependency(%q<activesupport>, [">= 3.0.0"])
     s.add_dependency(%q<activemodel>, [">= 3.0.0"])
-    s.add_dependency(%q<typhoeus>, [">= 0.1.31"])
   end
 end
 
