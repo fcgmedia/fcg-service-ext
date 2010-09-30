@@ -8,7 +8,6 @@ require 'active_model'
 require 'fcg-service-ext/version'
 %W{
   fcg
-  service
   mongo_mapper/plugins
 }.each do |file|
   require "fcg-service-ext/#{file}"

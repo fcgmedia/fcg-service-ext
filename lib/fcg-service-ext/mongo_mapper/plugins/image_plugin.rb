@@ -7,8 +7,8 @@ module ImagePlugin
         album = "#{k}_album".to_sym
         counter = "#{k}_album.count".to_sym
         
-        key ks,            Array,   :typecast => 'ObjectId'
-        key album,         Hash
+        field ks,            :type => Array,   :typecast => 'ObjectId'
+        field album,         :type => Hash
         scope "has_#{ks}".to_sym, where(counter.gt => 0)
         
         create_image_keys_instance_methods(k)
@@ -113,5 +113,11 @@ module ImagePlugin
   
   def self.configure(model)
     # puts "Configuring ImagePlugin for #{model}..."
+  end
+  
+  
+  def self.included(receiver)
+    receiver.extend         ClassMethods
+    receiver.send :include, InstanceMethods
   end
 end
