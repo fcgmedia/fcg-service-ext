@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2010-09-20}
+  s.date = %q{2010-09-30}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [
@@ -31,7 +31,6 @@ Gem::Specification.new do |s|
      "lib/fcg-service-ext/models/user_includable.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/image_plugin.rb",
-     "lib/fcg-service-ext/mongo_mapper/plugins/mm-paranoid.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/rating_plugin.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/social_module.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/social_plugin.rb",

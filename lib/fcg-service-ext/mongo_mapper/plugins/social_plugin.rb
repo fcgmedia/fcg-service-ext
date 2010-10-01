@@ -7,13 +7,14 @@ module SocialPlugin
   
   def self.configure(model)
     # puts "Configuring SocialPlugin for #{model}..."
-    model.key :facebook_session, Hash
-    model.key :facebook_id, String
-    model.key :facebook_proxy_email, String
-    model.key :twitter_username, String
+    model.field :facebook_session, :type => Hash
+    model.field :facebook_id, :type => String
+    model.field :facebook_proxy_email, :type => String
+    model.field :twitter_username, :type => String
   end
   
   def self.included(receiver)
     receiver.send :include, SocialModule
+    self.configure(receiver)
   end
 end

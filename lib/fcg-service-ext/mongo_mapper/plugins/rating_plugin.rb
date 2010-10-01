@@ -1,6 +1,5 @@
 module RatingPlugin
-  def self.configure(model)
-    # puts "Configuring RatingPlugin for #{model}..."
-    model.key :rating, Float, :default => 0.0
+  def self.included(receiver)
+    receiver.field :rating, :type => Float, :default => 0.0
   end
 end

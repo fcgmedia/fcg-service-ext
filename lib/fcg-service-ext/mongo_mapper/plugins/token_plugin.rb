@@ -7,11 +7,12 @@ module TokenPlugin
   
   def self.configure(model)
     # puts "Configuring TokenPlugin for #{model}..."
-    model.key :token_id, String
-    model.key :token_expire_at, Time
+    model.field :token_id, :type => String
+    model.field :token_expire_at, :type => Time
   end
 
   def self.included(receiver)
     receiver.send :include, TokenModule
+    self.configure(receiver)
   end
 end

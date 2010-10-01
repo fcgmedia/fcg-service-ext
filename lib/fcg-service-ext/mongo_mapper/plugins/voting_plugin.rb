@@ -26,12 +26,17 @@ module VotingPlugin
   
   def self.configure(model)
     # puts "Configuring VotingPlugin for #{model}..."
-    model.key :up_voters,     Array
-    model.key :up_votes,      Integer, :default => 0
-    model.key :down_voters,   Array
-    model.key :down_votes,    Integer, :default => 0
-    model.key :net_votes,     Integer, :default => 0
+    model.field :up_voters,     :type => Array
+    model.field :up_votes,      :type => Integer, :default => 0
+    model.field :down_voters,   :type => Array
+    model.field :down_votes,    :type => Integer, :default => 0
+    model.field :net_votes,     :type => Integer, :default => 0
     
     model.after_create :auto_upvote if model.respond_to? :after_create
+  end
+  
+  def self.included(receiver)
+    receiver.send :include, InstanceMethods
+    self.configure(receiver)
   end
 end
