@@ -18,10 +18,6 @@ begin
     gem.add_dependency "yajl-ruby"
     gem.add_dependency "ruby-hmac"
     gem.add_dependency 'guid'
-    gem.add_dependency 'bson', ">= 1.0.7"
-    gem.add_dependency 'bson_ext', ">= 1.0.7"
-    gem.add_dependency 'mongo_mapper', ">= 0.8.4"
-    gem.add_dependency 'activemodel', ">= 3.0.0"
     
     gem.version = FcgServiceExt::VERSION
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

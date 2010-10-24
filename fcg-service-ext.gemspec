@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2010-09-30}
+  s.date = %q{2010-10-24}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [
@@ -65,10 +65,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<yajl-ruby>, [">= 0"])
       s.add_runtime_dependency(%q<ruby-hmac>, [">= 0"])
       s.add_runtime_dependency(%q<guid>, [">= 0"])
-      s.add_runtime_dependency(%q<bson>, [">= 1.0.7"])
-      s.add_runtime_dependency(%q<bson_ext>, [">= 1.0.7"])
-      s.add_runtime_dependency(%q<mongo_mapper>, [">= 0.8.4"])
-      s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
     else
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
       s.add_dependency(%q<i18n>, [">= 0"])
@@ -76,10 +72,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<yajl-ruby>, [">= 0"])
       s.add_dependency(%q<ruby-hmac>, [">= 0"])
       s.add_dependency(%q<guid>, [">= 0"])
-      s.add_dependency(%q<bson>, [">= 1.0.7"])
-      s.add_dependency(%q<bson_ext>, [">= 1.0.7"])
-      s.add_dependency(%q<mongo_mapper>, [">= 0.8.4"])
-      s.add_dependency(%q<activemodel>, [">= 3.0.0"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
@@ -88,10 +80,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<yajl-ruby>, [">= 0"])
     s.add_dependency(%q<ruby-hmac>, [">= 0"])
     s.add_dependency(%q<guid>, [">= 0"])
-    s.add_dependency(%q<bson>, [">= 1.0.7"])
-    s.add_dependency(%q<bson_ext>, [">= 1.0.7"])
-    s.add_dependency(%q<mongo_mapper>, [">= 0.8.4"])
-    s.add_dependency(%q<activemodel>, [">= 3.0.0"])
   end
 end
 

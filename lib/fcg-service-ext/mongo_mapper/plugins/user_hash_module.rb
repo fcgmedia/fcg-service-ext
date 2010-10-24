@@ -6,7 +6,7 @@ module UserHashModule
       end
 
       define_method("#{name}_name") do
-        names[name]
+        names[name] if names.is_a?(Hash) and names.include?(name)
       end
     end
 
