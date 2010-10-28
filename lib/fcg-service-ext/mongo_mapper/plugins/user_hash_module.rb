@@ -1,22 +1,17 @@
 module UserHashModule
   module InstanceMethods
-    [:first, :last].each do |name|
-      define_method("#{name}_name=") do |val|
-        names[name] = val
-      end
-
-      define_method("#{name}_name") do
-        names[name] if names.is_a?(Hash) and names.include?(name)
-      end
-    end
-
     def full_name
       [first_name, last_name].compact.join(" ").strip
     end
 
     [:enabled, :confirmed, :keep_profile_private].each do |f|
       define_method("#{f}=") do |val|
-        flags[f] = !!val
+        flags[f] = case val
+        when true, "true", 1, "1"
+          true
+        else
+          false
+        end
       end
 
       define_method(f) do
