@@ -1,11 +1,13 @@
 require 'rubygems'
-require 'json'
-require 'yajl/json_gem'
-require 'ruby_hmac'
-require 'hmac-sha1'
-require 'active_model'
-require 'active_support'
-
+require "bundler/setup"
+# require 'json'
+# require 'yajl/json_gem'
+# require 'ruby_hmac'
+# require 'hmac-sha1'
+# require 'active_model'
+# require 'active_support'
+Bundler.setup
+Bundler.require(:default)
 require 'fcg-service-ext/version'
 %W{
   fcg

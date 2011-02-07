@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fcg-service-ext (0.0.15)
+    fcg-service-ext (0.0.16)
       activesupport
       guid
       i18n
