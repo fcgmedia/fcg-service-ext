@@ -13,11 +13,13 @@ begin
     gem.authors = ["Samuel O. Obukwelu"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     
+    gem.add_dependency "mongo_mapper"
     gem.add_dependency "i18n"
     gem.add_dependency "json"
     gem.add_dependency "yajl-ruby"
     gem.add_dependency "ruby-hmac"
     gem.add_dependency 'guid'
+    gem.add_dependency 'activesupport'
     
     gem.version = FcgServiceExt::VERSION
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
