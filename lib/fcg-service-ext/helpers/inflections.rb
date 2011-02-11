@@ -49,7 +49,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular('child', 'children')
   inflect.irregular('sex', 'sexes')
   inflect.irregular('move', 'moves')
-  inflect.irregular('status', 'status')
 
-  inflect.uncountable(%w(equipment information rice money species series fish sheep))
+  inflect.uncountable(%w(equipment information rice money species series fish sheep status))
 end
