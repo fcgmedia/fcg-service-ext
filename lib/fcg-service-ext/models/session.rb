@@ -1,4 +1,4 @@
-require 'fcg-service-clients/models/session'
+require 'fcg_service_clients/models/session'
 
 module FCG
   module Models
