@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
@@ -32,6 +32,8 @@ Gem::Specification.new do |s|
      "lib/fcg-service-ext/helpers/google_ajax_api.rb",
      "lib/fcg-service-ext/helpers/inflections.rb",
      "lib/fcg-service-ext/helpers/session_controller_helper.rb",
+     "lib/fcg-service-ext/middleware/session_store.rb",
+     "lib/fcg-service-ext/models/session.rb",
      "lib/fcg-service-ext/models/user_includable.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins.rb",
      "lib/fcg-service-ext/mongo_mapper/plugins/image_plugin.rb",
