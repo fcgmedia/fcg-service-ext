@@ -1,7 +1,7 @@
 require 'rack/session/abstract/id'
 require 'securerandom'
 
-# Backporting from Rack trunk, current version(1.2.1) doesn't have ssl? helper and it's 'scheme' method is too naive.
+# Backporting from Rack trunk, current version(1.2.1) doesn't have ssl? helper and its 'scheme' method is too naive.
 module Rack
   class Request
 
@@ -55,7 +55,7 @@ module Rack
         @cookie_only = @options.delete(:cookie_only)
         @params_sid_paths = @options.delete(:params_sid_paths)
         @ssl = @options.delete(:ssl)
-        @secret = options.delete(:secret)
+        @secret = @options.delete(:secret)
 
         # Backend - FCG service store or Memcache ( for testing and backup )
         @pool = Backends::const_get(@options[:backend]).connect(@options[:server])
@@ -171,6 +171,7 @@ module Rack
         with_lock(env, [nil, {}]) do
           unless sid and session = @pool.get(sid)
             sid, session = generate_sid, {}
+            # TODO better collision detection
             if collision = @pool.get(sid) and collision.is_a? Hash
               raise "Session collision on '#{sid.inspect}'"
             else
