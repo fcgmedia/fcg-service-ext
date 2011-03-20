@@ -22,7 +22,8 @@ module FCG
         :start_following => "started following",
         :tag => "tagged",
         :update => "updated",
-        :view => "viewed"
+        :view => "viewed",
+        :rsvp => "RSVP'd"
       }
     end
     
