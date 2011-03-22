@@ -23,7 +23,7 @@ module FCG
         :tag => "tagged",
         :update => "updated",
         :view => "viewed",
-        :rsvp => "RSVP'd"
+        :rsvp_yes => "RSVP'd for"
       }
     end
     
