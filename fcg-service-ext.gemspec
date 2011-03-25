@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.1.8"
+  s.version = "0.1.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2011-03-13}
+  s.date = %q{2011-03-24}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [

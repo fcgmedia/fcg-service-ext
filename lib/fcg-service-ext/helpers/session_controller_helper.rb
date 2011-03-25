@@ -5,7 +5,7 @@ module FCG
       def create_user_cookie(*args)
         options = args.extract_options!
         opts = {
-          :time => Time.now,
+          :time => Time.now.utc,
           :secret => "S9vtS#wPFP'xX=AcLi-B,I#JEjh5h(~RgmZ<XXsi'Ufac<$x8q%._owOtJ>A7'D",
           :app_name => "FCG",
           :user_info => {},

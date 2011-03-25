@@ -13,7 +13,6 @@ module FCG
       receiver.send :include, InstanceMethods
       receiver.send :include, UserHashModule
       receiver.send :include, TokenModule
-      receiver.send :include, SocialModule
     end
   end
 end
