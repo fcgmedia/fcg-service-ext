@@ -15,7 +15,7 @@ module FCG
         :join => "joined",
         :make_friend => "made friends with",
         :mark_as_favorite => "marked as favorite",
-        :mark_as_liked => "likes",
+        :mark_as_liked => "liked",
         :play => "played",
         :post => "posted",
         :save => "saved", 
