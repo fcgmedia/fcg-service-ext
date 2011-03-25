@@ -11,6 +11,7 @@ module FCG
     module VERBS
       # [actor] [verb] [object] [target]
       ALL = {
+        :create => "created",
         :join => "joined",
         :make_friend => "made friends with",
         :mark_as_favorite => "marked as favorite",
