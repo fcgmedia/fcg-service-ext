@@ -11,10 +11,11 @@ module FCG
     module VERBS
       # [actor] [verb] [object] [target]
       ALL = {
+        :create => "created",
         :join => "joined",
         :make_friend => "made friends with",
         :mark_as_favorite => "marked as favorite",
-        :mark_as_liked => "likes",
+        :mark_as_liked => "liked",
         :play => "played",
         :post => "posted",
         :save => "saved", 
@@ -22,7 +23,8 @@ module FCG
         :start_following => "started following",
         :tag => "tagged",
         :update => "updated",
-        :view => "viewed"
+        :view => "viewed",
+        :rsvp_yes => "RSVP'd for"
       }
     end
     
