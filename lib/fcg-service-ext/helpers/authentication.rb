@@ -59,7 +59,7 @@ module FCG
       end
 
       def logged_in?
-        current_user != :false
+        !current_user.nil?
       end
     
       def sessions_as_json
