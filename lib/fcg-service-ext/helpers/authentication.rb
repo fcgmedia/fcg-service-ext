@@ -6,7 +6,7 @@ module FCG
   
     protected
       def current_user
-        @current_user ||= (session[:user] && User.find(session[:user])) || :false
+        @current_user ||= (session[:user] && User.find(session[:user]))
       end
     
       # Store the given user in the session.
