@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fcg-service-ext}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Samuel O. Obukwelu"]
-  s.date = %q{2011-06-18}
+  s.date = %q{2011-08-11}
   s.description = %q{An extension for FCG Services}
   s.email = %q{sam@fcgmedia.com}
   s.extra_rdoc_files = [
@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".rvmrc",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE",
@@ -49,14 +50,15 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://github.com/joemocha/fcg-service-ext}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{FCG Service Extensions}
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<fcg-service-ext>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0"])
       s.add_development_dependency(%q<rspec>, [">= 2.0"])
       s.add_runtime_dependency(%q<activesupport>, [">= 0"])
       s.add_runtime_dependency(%q<mongo_mapper>, [">= 0"])
@@ -66,6 +68,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<ruby-hmac>, [">= 0"])
       s.add_runtime_dependency(%q<guid>, [">= 0"])
     else
+      s.add_dependency(%q<fcg-service-ext>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 2.0"])
       s.add_dependency(%q<rspec>, [">= 2.0"])
       s.add_dependency(%q<activesupport>, [">= 0"])
       s.add_dependency(%q<mongo_mapper>, [">= 0"])
@@ -76,6 +80,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<guid>, [">= 0"])
     end
   else
+    s.add_dependency(%q<fcg-service-ext>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 2.0"])
     s.add_dependency(%q<rspec>, [">= 2.0"])
     s.add_dependency(%q<activesupport>, [">= 0"])
     s.add_dependency(%q<mongo_mapper>, [">= 0"])

@@ -1,14 +1,16 @@
 module FCG
   module Authentication
-    def self.included(controller)
-      controller.send :helper_method, :current_user, :redirect_back_or_default, :require_user, :require_no_user, :sessions_as_json, :logged_in?
+    extend ActiveSupport::Concern
+
+    included do |controller|
+      controller.send(:helper_method, :current_user, :redirect_back_or_default, :require_user, :require_no_user, :sessions_as_json, :logged_in?) if defined? Rails
     end
-  
-    protected
+
+    module InstanceMethods
       def current_user
         @current_user ||= (session[:user] && User.find(session[:user]))
       end
-    
+
       # Store the given user in the session.
       def current_user=(new_user)
         if new_user.nil? or new_user.is_a?(Symbol)
@@ -18,11 +20,11 @@ module FCG
         end
         @current_user = new_user
       end
-    
+
       def reset_session
         session[:user] = nil
       end
-    
+
       def require_user
         unless logged_in?
           respond_to do |format|
@@ -44,7 +46,7 @@ module FCG
           return false
         end
       end
-    
+
       def sign_in(user)
         current_user = user
       end
@@ -61,7 +63,7 @@ module FCG
       def logged_in?
         !current_user.nil?
       end
-    
+
       def sessions_as_json
         state = if logged_in?
           {
@@ -76,5 +78,6 @@ module FCG
         end
         state.to_json
       end
+    end
   end
 end
