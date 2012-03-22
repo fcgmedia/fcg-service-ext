@@ -21,6 +21,7 @@ module FCG
         :save => "saved", 
         :share => "shared", 
         :start_following => "started following",
+        :stop_following => "stopped following",
         :tag => "tagged",
         :update => "updated",
         :view => "viewed",
