@@ -21,7 +21,7 @@ begin
     gem.add_dependency 'yajl-ruby'
     gem.add_dependency 'ruby-hmac'
     gem.add_dependency 'guid'
-    
+
     gem.version = FcgServiceExt::VERSION
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
@@ -29,8 +29,6 @@ begin
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
-
-
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec) do |t|
